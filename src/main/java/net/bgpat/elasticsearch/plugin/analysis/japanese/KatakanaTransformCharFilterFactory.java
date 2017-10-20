@@ -18,8 +18,13 @@ import java.io.StringReader;
 import java.util.List;
 
 public class KatakanaTransformCharFilterFactory extends AbstractCharFilterFactory implements MultiTermAwareComponent {
+    static private Tokenizer tokenizer;
+
     public KatakanaTransformCharFilterFactory(IndexSettings indexSettings, Environment env, String name, Settings settings) {
         super(indexSettings, name);
+        if (tokenizer == null) {
+            tokenizer = new Tokenizer();
+        }
     }
 
     @Override
@@ -33,7 +38,6 @@ public class KatakanaTransformCharFilterFactory extends AbstractCharFilterFactor
             return reader;
         }
 
-        Tokenizer tokenizer = new Tokenizer() ;
         List<Token> tokens = tokenizer.tokenize(src);
         String kana = "";
         for (Token token : tokens) {
@@ -43,9 +47,6 @@ public class KatakanaTransformCharFilterFactory extends AbstractCharFilterFactor
                 kana += token.getSurface();
             }
         }
-
-        //Transliterator transliterator = Transliterator.getInstance("Any-Katakana");
-        //kana = transliterator.transliterate(kana);
 
         return new StringReader(kana);
     }
