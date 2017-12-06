@@ -1,4 +1,4 @@
 language: java
 before_install:
   - cd kuromoji
-  - travis_wait 60 mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am
+  - travis_wait 60 mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V
