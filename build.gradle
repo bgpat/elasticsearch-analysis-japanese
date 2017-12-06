@@ -14,17 +14,18 @@ configurations {
 }
 
 dependencies {
-	compile fileTree(dir: 'kuromoji', include: '**/*.jar')
+	compile files('kuromoji/kuromoji-core/target/kuromoji-core-1.0-SNAPSHOT.jar', 'kuromoji/kuromoji-ipadic-neologd/target/kuromoji-ipadic-neologd-1.0-SNAPSHOT.jar')
 	compile 'commons-io:commons-io:2.5'
 	compile "org.elasticsearch:elasticsearch:${elasticsearch_version}"
 }
 
 task distZip(type: Zip, dependsOn: jar) {
 	archiveName = 'elasticsearch-analysis-japanese.zip'
-	from jar.archivePath
-	from configurations.releaseJars
-	from 'build/resources/main/plugin-descriptor.properties'
-	into 'elasticsearch'
+	into ('elasticsearch') {
+		from jar.archivePath
+		from configurations.releaseJars
+		from 'build/resources/main/plugin-descriptor.properties'
+	}
 }
 
 processResources {
@@ -37,4 +38,10 @@ processResources {
 
 artifacts {
     archives distZip
+}
+
+jar {
+	into('META-INF') {
+		from 'LICENSE'
+	}
 }
