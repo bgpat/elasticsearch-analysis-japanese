@@ -1,5 +1,4 @@
 language: java
-before_install:
+before_script:
   - cd kuromoji
-  - export MAVEN_OPTS=-Xmx1024m
-  - travis_wait 60 mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V -X
+  - MAVEN_OPTS=-Xmx1024m mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V -X
