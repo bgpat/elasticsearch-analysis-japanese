@@ -1,4 +1,16 @@
+buildscript {
+	repositories {
+		maven {
+			url 'https://plugins.gradle.org/m2/'
+		}
+	}
+	dependencies {
+		classpath 'gradle.plugin.com.github.breadmoirai:github-release:1.0.9'
+	}
+}
+
 apply plugin: 'java'
+apply plugin: 'com.github.breadmoirai.github-release'
 
 defaultTasks 'clean', 'build'
 
@@ -44,4 +56,12 @@ jar {
 	into('META-INF') {
 		from 'LICENSE'
 	}
+}
+
+githubRelease {
+	token = "$GITHUB_TOKEN"
+	owner = 'bgpat'
+	repo = 'elasticsearch-analysis-japanese'
+	draft = true
+	releaseAssets = distZip.destinationDir.listFiles()
 }
