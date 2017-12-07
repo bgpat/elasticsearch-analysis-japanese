@@ -1,6 +1,0 @@
-language: java
-env:
-  - MAVEN_OPTS="-Xmx6g -Xms2g"
-install:
-  - cd kuromoji
-  - travis_wait 30 mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V -X
