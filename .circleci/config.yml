@@ -5,8 +5,8 @@ jobs:
       - image: circleci/openjdk:8-jdk
     working_directory: ~/repo
     environment:
-      JVM_OPTS: -Xmx3200m
-      MAVEN_OPTS: -Xmx3200m
+      JVM_OPTS: -Xmx4000m
+      MAVEN_OPTS: -Xmx4000m
       TERM: dumb
     steps:
       - checkout
