@@ -12,9 +12,16 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          - v1-dependencies-
+            - kuromoji-build-{{ (cd kuromoji && git rev-parse HEAD) }}
       - run: ls kuromoji/*/taeget/*.jar || (git submodule update --init --recursive && cd kuromoji && mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V)
+      - save_cache:
+          paths:
+            - ~/repo/kuromoji
+          key: kuromoji-build-{{ git rev-parse HEAD }}
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
       - run: gradle dependencies
       - save_cache:
           paths:
