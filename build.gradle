@@ -64,5 +64,6 @@ githubRelease {
 	owner = 'bgpat'
 	repo = 'elasticsearch-analysis-japanese'
 	tagName = "$project.version"
+	releaseName = "$project.version"
 	releaseAssets = distZip.destinationDir.listFiles()
 }
