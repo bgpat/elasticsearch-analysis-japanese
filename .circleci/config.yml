@@ -41,6 +41,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
+          at: ~/repo/build
       - run: gradle githubRelease -Pversion=0.0.1
 workflows:
   version: 2
