@@ -59,6 +59,7 @@ jar {
 }
 
 githubRelease {
+	print("version = $project.version")
 	token = "$GITHUB_TOKEN"
 	owner = 'bgpat'
 	repo = 'elasticsearch-analysis-japanese'
