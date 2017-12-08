@@ -10,16 +10,16 @@ jobs:
       TERM: dumb
     steps:
       - checkout
-      - run: git submodule update --init --recursive
-      - run: cd kuromoji && mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V && cd ..
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "build.gradle" }}
           - v1-dependencies-
+      - run: ls kuromoji/*/taeget/*.jar || (git submodule update --init --recursive && cd kuromoji && mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V)
       - run: gradle dependencies
       - save_cache:
           paths:
             - ~/.gradle
+            - ~/repo/kuromoji
           key: v1-dependencies-{{ checksum "build.gradle" }}
       - run: gradle build
       - persist_to_workspace:
