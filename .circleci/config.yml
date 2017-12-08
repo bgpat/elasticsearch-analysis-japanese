@@ -32,6 +32,8 @@ jobs:
       - run: gradle build
       - persist_to_workspace:
           root: build
+          paths:
+            - distributions
   deploy:
     docker:
       - image: circleci/openjdk:8-jdk
