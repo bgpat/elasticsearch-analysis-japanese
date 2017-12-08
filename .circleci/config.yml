@@ -10,10 +10,11 @@ jobs:
       TERM: dumb
     steps:
       - checkout
+      - run: git submodule update --init --recursive
       - restore_cache:
           keys:
             - kuromoji-build-{{ checksum "kuromoji/pom.xml" }}
-      - run: ls kuromoji/*/taeget/*.jar || (git submodule update --init --recursive && cd kuromoji && mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V)
+      - run: ls kuromoji/*/taeget/*.jar || (cd kuromoji && mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V)
       - save_cache:
           paths:
             - ~/repo/kuromoji
