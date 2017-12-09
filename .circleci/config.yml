@@ -73,10 +73,14 @@ workflows:
             tags:
               only: /.*/
       - build-es5.6.5:
+          requires:
+            - kuromoji
           filters:
             tags:
               only: /.*/
       - build-es5.6.4:
+          requires:
+            - kuromoji
           filters:
             tags:
               only: /.*/
