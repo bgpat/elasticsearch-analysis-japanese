@@ -59,11 +59,9 @@ jar {
 }
 
 githubRelease {
-	print("version = $project.version")
+	println("version = $project.version")
 	token = "$GITHUB_TOKEN"
 	owner = 'bgpat'
 	repo = 'elasticsearch-analysis-japanese'
-	tagName = "$project.version"
-	releaseName = "$project.version"
 	releaseAssets = distZip.destinationDir.listFiles()
 }

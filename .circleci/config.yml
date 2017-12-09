@@ -42,7 +42,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo/build
-      - run: gradle githubRelease -Pversion="${CIRCLE_TAG}"
+      - run: gradle githubRelease -Pversion="${CIRCLE_TAG#v}"
 workflows:
   version: 2
   build-n-deploy:
