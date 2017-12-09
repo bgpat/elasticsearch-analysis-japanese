@@ -14,6 +14,7 @@ jobs:
       - restore_cache:
           keys:
             - kuromoji-build-{{ checksum "kuromoji/pom.xml" }}
+            - kuromoji-build-
       - run: ls kuromoji/*/target/*.jar || (cd kuromoji && mvn clean package -DskipTests=true -pl kuromoji-ipadic-neologd -am -B -V)
       - save_cache:
           paths:
@@ -27,7 +28,6 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-            - ~/repo/kuromoji
           key: v1-dependencies-{{ checksum "build.gradle" }}
       - run: gradle build
       - persist_to_workspace:
@@ -42,7 +42,14 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo/build
-      - run: if [[ "$CIRCLE_TAG" =~ ^v ]]; then gradle githubRelease -Pversion="${CIRCLE_TAG#v}"; fi
+      - deploy:
+          command: |
+            if [[ "$CIRCLE_TAG" =~ ^v ]]; then
+              gradle githubRelease -Pversion="${CIRCLE_TAG#v}"
+            fi
+deployment:
+  release:
+    tag: /^v/
 workflows:
   version: 2
   build-n-deploy:
