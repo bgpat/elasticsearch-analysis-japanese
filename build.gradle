@@ -32,7 +32,7 @@ dependencies {
 }
 
 task distZip(type: Zip, dependsOn: jar) {
-	archiveName = 'elasticsearch-analysis-japanese.zip'
+	archiveName = "elasticsearch-analysis-japanese-${project.version}-es${elasticsearch_version}.zip"
 	into ('elasticsearch') {
 		from jar.archivePath
 		from configurations.releaseJars
