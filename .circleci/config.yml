@@ -42,14 +42,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo/build
-      - deploy:
-          command: |
-            if [[ "$CIRCLE_TAG" =~ ^v ]]; then
-              gradle githubRelease -Pversion="${CIRCLE_TAG#v}"
-            fi
-deployment:
-  release:
-    tag: /^v/
+      - run: if [[ "$CIRCLE_TAG" =~ ^v ]]; then gradle githubRelease -Pversion="${CIRCLE_TAG#v}"; fi
 workflows:
   version: 2
   build-n-deploy:
@@ -60,6 +53,6 @@ workflows:
             - build
           filters:
             tags:
-              only: /^v.*/
+              only: /^v/
             branches:
               only: master
