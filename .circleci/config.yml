@@ -55,6 +55,70 @@ jobs:
     <<: *build-template
     environment:
       ELASTICSEARCH_VERSION: 5.6.4
+  build-es2.6.4:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 2.6.4
+  build-es5.6.3:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.6.3
+  build-es5.5.2:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.5.2
+  build-es5.5.1:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.5.1
+  build-es5.5.0:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.5.0
+  build-es2.4.5:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 2.4.5
+  build-es5.4.3:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.4.3
+  build-es5.4.2:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.4.2
+  build-es5.4.0:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.4.0
+  build-es1.7.6:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 1.7.6
+  build-es5.3.2:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.3.2
+  build-es5.3.1:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.3.1
+  build-es2.4.4:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 2.4.4
+  build-es5.3.0:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.3.0
+  build-es5.2.2:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.2.2
+  build-es5.2.1:
+    <<: *build-template
+    environment:
+      ELASTICSEARCH_VERSION: 5.2.1
   deploy:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -84,10 +148,122 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - build-es2.6.4:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.6.3:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.5.2:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.5.1:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.5.0:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es2.4.5:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.4.3:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.4.2:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.4.0:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es1.7.6:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.3.2:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.3.1:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es2.4.4:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.3.0:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.2.2:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
+      - build-es5.2.1:
+          requires:
+            - kuromoji
+          filters:
+            tags:
+              only: /.*/
       - deploy:
           requires:
             - build-es5.6.5
             - build-es5.6.4
+            - build-es2.6.4
+            - build-es5.6.3
+            - build-es5.5.2
+            - build-es5.5.1
+            - build-es5.5.0
+            - build-es2.4.5
+            - build-es5.4.3
+            - build-es5.4.2
+            - build-es5.4.0
+            - build-es1.7.6
+            - build-es5.3.2
+            - build-es5.3.1
+            - build-es2.4.4
+            - build-es5.3.0
+            - build-es5.2.2
+            - build-es5.2.1
           filters:
             tags:
               only: /v.*/
