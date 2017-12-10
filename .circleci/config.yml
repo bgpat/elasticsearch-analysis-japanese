@@ -55,10 +55,6 @@ jobs:
     <<: *build-template
     environment:
       ELASTICSEARCH_VERSION: 5.6.4
-  build-es2.6.4:
-    <<: *build-template
-    environment:
-      ELASTICSEARCH_VERSION: 2.6.4
   build-es5.6.3:
     <<: *build-template
     environment:
@@ -75,10 +71,6 @@ jobs:
     <<: *build-template
     environment:
       ELASTICSEARCH_VERSION: 5.5.0
-  build-es2.4.5:
-    <<: *build-template
-    environment:
-      ELASTICSEARCH_VERSION: 2.4.5
   build-es5.4.3:
     <<: *build-template
     environment:
@@ -91,10 +83,6 @@ jobs:
     <<: *build-template
     environment:
       ELASTICSEARCH_VERSION: 5.4.0
-  build-es1.7.6:
-    <<: *build-template
-    environment:
-      ELASTICSEARCH_VERSION: 1.7.6
   build-es5.3.2:
     <<: *build-template
     environment:
@@ -103,10 +91,6 @@ jobs:
     <<: *build-template
     environment:
       ELASTICSEARCH_VERSION: 5.3.1
-  build-es2.4.4:
-    <<: *build-template
-    environment:
-      ELASTICSEARCH_VERSION: 2.4.4
   build-es5.3.0:
     <<: *build-template
     environment:
@@ -148,12 +132,6 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - build-es2.6.4:
-          requires:
-            - kuromoji
-          filters:
-            tags:
-              only: /.*/
       - build-es5.6.3:
           requires:
             - kuromoji
@@ -178,12 +156,6 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - build-es2.4.5:
-          requires:
-            - kuromoji
-          filters:
-            tags:
-              only: /.*/
       - build-es5.4.3:
           requires:
             - kuromoji
@@ -202,12 +174,6 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - build-es1.7.6:
-          requires:
-            - kuromoji
-          filters:
-            tags:
-              only: /.*/
       - build-es5.3.2:
           requires:
             - kuromoji
@@ -215,12 +181,6 @@ workflows:
             tags:
               only: /.*/
       - build-es5.3.1:
-          requires:
-            - kuromoji
-          filters:
-            tags:
-              only: /.*/
-      - build-es2.4.4:
           requires:
             - kuromoji
           filters:
@@ -248,19 +208,15 @@ workflows:
           requires:
             - build-es5.6.5
             - build-es5.6.4
-            - build-es2.6.4
             - build-es5.6.3
             - build-es5.5.2
             - build-es5.5.1
             - build-es5.5.0
-            - build-es2.4.5
             - build-es5.4.3
             - build-es5.4.2
             - build-es5.4.0
-            - build-es1.7.6
             - build-es5.3.2
             - build-es5.3.1
-            - build-es2.4.4
             - build-es5.3.0
             - build-es5.2.2
             - build-es5.2.1
